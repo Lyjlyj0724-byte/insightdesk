@@ -9,7 +9,6 @@ from insightdesk.metrics import (
     count_unresolved,
 )
 
-
 # ---------- 正常路径：已知输入 → 断言已知输出 ----------
 
 @pytest.mark.parametrize("n", [0, 1, 5])
