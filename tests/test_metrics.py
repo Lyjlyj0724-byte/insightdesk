@@ -5,6 +5,7 @@ from insightdesk.metrics import (
     avg_resolution_hours,
     compute_metrics,
     count_by_channel,
+    count_by_priority,
     count_total,
     count_unresolved,
 )
@@ -37,7 +38,9 @@ def test_count_unresolved(five_rows):
 
 def test_compute_metrics_returns_all_keys(five_rows):
     metrics = compute_metrics(five_rows)
-    assert set(metrics) == {"total", "channels", "avg_resolution_hours", "unresolved"}
+    assert set(metrics) == {
+        "total", "channels", "priorities", "avg_resolution_hours", "unresolved",
+    }
     assert metrics["total"] == 5
 
 
@@ -86,3 +89,16 @@ def test_count_by_channel_missing_column_raises(row):
     del r["channel"]
     with pytest.raises(KeyError):
         count_by_channel([r])
+
+
+# ---------- 按优先级分组（issue #6）----------
+
+def test_count_by_priority(five_rows):
+    # five_rows 全部是默认 priority="medium"
+    assert count_by_priority(five_rows) == {"medium": 5}
+
+
+def test_count_by_priority_mixed(row):
+    rows = [row(priority="high"), row(id="2", priority="low"), row(id="3", priority="high")]
+    assert count_by_priority(rows) == {"high": 2, "low": 1}
+    assert list(count_by_priority(rows)) == ["high", "low"]  # 保持首次出现顺序

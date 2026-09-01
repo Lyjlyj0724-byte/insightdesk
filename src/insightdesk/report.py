@@ -16,6 +16,9 @@ def render_report(metrics):
     ]
     for ch in metrics["channels"]:
         lines.append("  " + ch + ": " + str(metrics["channels"][ch]))
+    lines.append("按优先级分布:")
+    for p in metrics["priorities"]:
+        lines.append("  " + p + ": " + str(metrics["priorities"][p]))
     return "\n".join(lines)
 
 

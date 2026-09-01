@@ -12,6 +12,7 @@ def test_render_report_format():
     metrics = {
         "total": 2,
         "channels": {"email": 1, "web": 1},
+        "priorities": {"high": 1, "low": 1},
         "avg_resolution_hours": 1.5,
         "unresolved": 1,
     }
@@ -23,11 +24,17 @@ def test_render_report_format():
         "按渠道分布:",
         "  email: 1",
         "  web: 1",
+        "按优先级分布:",
+        "  high: 1",
+        "  low: 1",
     ]
 
 
 def test_render_report_rounds_avg_hours():
-    metrics = {"total": 1, "channels": {}, "avg_resolution_hours": 1.005, "unresolved": 0}
+    metrics = {
+        "total": 1, "channels": {}, "priorities": {},
+        "avg_resolution_hours": 1.005, "unresolved": 0,
+    }
     assert "平均解决时长(小时): 1.0" in render_report(metrics)
 
 
