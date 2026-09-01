@@ -7,6 +7,12 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 
-# 数据文件不入库（样例数据本地保留，基线输出用于回归测试）
-data/
+# 构建产物
+*.egg-info/
+dist/
+
+# 数据文件不入库，但样例数据和回归基线除外（测试要用）
 *.csv
+data/*
+!data/tickets_sample.csv
+!data/baseline_output.txt
