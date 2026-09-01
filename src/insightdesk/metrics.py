@@ -4,7 +4,7 @@
 """
 from datetime import datetime
 
-TIME_FORMAT = "%Y-%m-%d %H:%M:%S"  # TODO: 后续考虑支持 ISO 8601 格式
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"  # 与工单 CSV 中的时间格式严格一致；TODO: 后续考虑支持 ISO 8601
 
 
 def count_total(rows):
