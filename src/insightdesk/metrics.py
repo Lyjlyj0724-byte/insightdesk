@@ -4,7 +4,7 @@
 """
 from datetime import datetime
 
-TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+TIME_FORMAT = "%Y-%m-%d %H:%M:%S"  # TODO: 后续考虑支持 ISO 8601 格式
 
 
 def count_total(rows):
