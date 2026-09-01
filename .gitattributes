@@ -1,0 +1,4 @@
+# Windows 换行符会导致 CI 上 diff/测试报错，统一按 LF 存储
+*.py text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
