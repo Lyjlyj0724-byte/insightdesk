@@ -38,7 +38,9 @@ def test_count_unresolved(five_rows):
 
 def test_compute_metrics_returns_all_keys(five_rows):
     metrics = compute_metrics(five_rows)
-    assert set(metrics) == {"total", "channels", "avg_resolution_hours", "unresolved"}
+    assert set(metrics) == {
+        "total", "channels", "priorities", "avg_resolution_hours", "unresolved",
+    }
     assert metrics["total"] == 5
 
 

@@ -8,14 +8,15 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 
-def make_row(id="1", channel="email", created_at="2026-08-01 09:00:00",
+def make_row(id="1", channel="email", priority="medium",
+             created_at="2026-08-01 09:00:00",
              resolved_at="2026-08-01 10:30:00"):
     """构造一行工单 dict，默认是一条 1.5 小时解决的 email 工单。"""
     return {
         "id": id,
         "title": "测试工单",
         "body": "测试内容",
-        "priority": "medium",
+        "priority": priority,
         "created_at": created_at,
         "resolved_at": resolved_at,
         "channel": channel,

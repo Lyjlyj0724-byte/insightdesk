@@ -21,6 +21,15 @@ def count_by_channel(rows):
     return channels
 
 
+def count_by_priority(rows):
+    """按优先级统计工单数，保持首次出现的顺序。"""
+    priorities = {}
+    for r in rows:
+        p = r["priority"]
+        priorities[p] = priorities.get(p, 0) + 1
+    return priorities
+
+
 def avg_resolution_hours(rows):
     """已解决工单的平均解决时长（小时）；没有已解决工单时返回 0。"""
     hours = []
@@ -48,6 +57,7 @@ def compute_metrics(rows):
     return {
         "total": count_total(rows),
         "channels": count_by_channel(rows),
+        "priorities": count_by_priority(rows),
         "avg_resolution_hours": avg_resolution_hours(rows),
         "unresolved": count_unresolved(rows),
     }
