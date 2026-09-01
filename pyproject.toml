@@ -19,3 +19,11 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+line-length = 100  # 中文注释偏多，放宽行宽
+
+[tool.ruff.lint]
+# 显式选择规则集：语法错误/未用导入(F)、pycodestyle(E/W)、import 排序(I)、
+# 现代化语法建议(UP)、常见 bug(B)。不启用 DTZ：工单 CSV 是本地 naive 时间。
+select = ["E", "F", "W", "I", "UP", "B"]

@@ -1,5 +1,7 @@
 # InsightDesk
 
+[![CI](https://github.com/Lyjlyj0724-byte/insightdesk/actions/workflows/ci.yml/badge.svg)](https://github.com/Lyjlyj0724-byte/insightdesk/actions/workflows/ci.yml)
+
 工单统计报表工具：读取工单 CSV，输出总量、未解决数、平均解决时长和渠道分布的纯文本报表。
 
 本项目是工程纪律练习仓库（Git / pytest / CI），从一份"能跑但很乱"的单文件脚本起步，逐步重构成可协作的工程仓库。
