@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insightdesk"
+version = "0.1.0"
+description = "InsightDesk 工单统计报表工具"
+requires-python = ">=3.10"
+
+[project.scripts]
+insightdesk = "insightdesk.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
