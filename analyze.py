@@ -8,20 +8,20 @@
 它故意写得很乱：全局变量、重复代码、没有函数边界、没有测试。
 你的任务是重构它，但【保持输出不变】。
 """
-import csv
 import sys
 from datetime import datetime
+from pathlib import Path
+
+# 让未安装包的情况下也能 import src/ 下的 insightdesk 包
+sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
+from insightdesk.loader import load_tickets
 
 results = {}
 
 
 def main(path):
-    f = open(path, newline="", encoding="utf-8")
-    reader = csv.DictReader(f)
-    rows = []
-    for r in reader:
-        rows.append(r)
-    f.close()
+    rows = load_tickets(path)
 
     # total
     total = 0
