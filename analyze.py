@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from insightdesk.loader import load_tickets
+from insightdesk.metrics import compute_metrics
 
 results = {}
 
@@ -23,44 +24,7 @@ results = {}
 def main(path):
     rows = load_tickets(path)
 
-    # total
-    total = 0
-    for r in rows:
-        total += 1
-    results["total"] = total
-
-    # by channel
-    channels = {}
-    for r in rows:
-        ch = r["channel"]
-        if ch not in channels:
-            channels[ch] = 0
-        channels[ch] = channels[ch] + 1
-    results["channels"] = channels
-
-    # avg resolution hours
-    hours = []
-    for r in rows:
-        if r["resolved_at"] != "" and r["resolved_at"] is not None:
-            t1 = datetime.strptime(r["created_at"], "%Y-%m-%d %H:%M:%S")
-            t2 = datetime.strptime(r["resolved_at"], "%Y-%m-%d %H:%M:%S")
-            delta = t2 - t1
-            h = delta.total_seconds() / 3600
-            hours.append(h)
-    if len(hours) > 0:
-        s = 0
-        for h in hours:
-            s = s + h
-        results["avg_resolution_hours"] = s / len(hours)
-    else:
-        results["avg_resolution_hours"] = 0
-
-    # unresolved
-    n = 0
-    for r in rows:
-        if r["resolved_at"] == "" or r["resolved_at"] is None:
-            n += 1
-    results["unresolved"] = n
+    results.update(compute_metrics(rows))
 
     # report
     print("=== InsightDesk 工单统计报表 ===")
